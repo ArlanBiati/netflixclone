@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Tmdb from "./Tmdb"
+import Header from "./components/Header/Header"
 import MovieRow from "./components/MovieRow/MovieRow"
 import FeaturedMovie from "./components/FeaturedMovie/FeaturedMovie"
 
@@ -9,6 +10,7 @@ export default () => {
 
   const [movieList, setMovieList] = useState([])
   const [featuredData, setFeaturedData] = useState(null)
+  const [blackHeader, setBlackHeader] = useState(false)
 
   useEffect(() => {
     const loadAll = async () => {
@@ -28,8 +30,25 @@ export default () => {
     loadAll()
   }, [])
 
+  useEffect(() => {
+    const scrollListener = () => {
+      if(window.scrollY > 10) {
+        setBlackHeader(true)
+      } else {
+        setBlackHeader(false)
+      }
+    }
+
+    window.addEventListener("scroll", scrollListener)
+
+    return () => {
+      window.removeEventListener("scroll", scrollListener)
+    }
+  }, [])
+
   return (
     <div className="page">
+      <Header black={blackHeader} />
 
       {featuredData && 
         <FeaturedMovie item={featuredData} />
@@ -40,6 +59,19 @@ export default () => {
           <MovieRow key={key} title={item.title} items={item.items} />
         ))}
       </section>
+
+      <footer>
+        Feito com carinho por Arlan Biati<br/>
+        Apenas para fruto de estudo
+      </footer>
+
+
+      {movieList.length <= 0 &&
+        <div className="loading">
+          <img src="https://www.filmelier.com/pt/br/news/wp-content/uploads/2020/03/netflix-loading.gif" alt="Carregando"/>
+        </div>
+      }
+      
     </div>
   )
 }

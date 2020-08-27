@@ -20,13 +20,15 @@
     justify-content: center;
 
     padding-left: 30px;
-    padding-bottom: 120px;
-    padding-top: 70px;
+    /* padding-bottom: 150px; */
+    padding-top: 0px;
 }
 
 .featured--name {
     font-size: 60px;
     font-weight: 700;
+
+    width: 50%;
 }
 
 .featured--info {
@@ -54,7 +56,7 @@
 
     color: #999;
 
-    max-width: 40%;
+    max-width: 45%;
 }
 
 .featured--buttons {
@@ -101,4 +103,35 @@
     font-size: 18px;
 
     color: #999;
+}
+
+@media (max-width: 760px) {
+    .featured {
+        height: 90vh;
+    }
+
+    .featured--name {
+        font-size: 40px;
+    }
+
+    .featured--info {
+        font-size: 16px;
+    }
+
+    .featured--description {
+        font-size: 14px;
+
+        max-width: 100%;
+
+        margin-right: 30px;
+    }
+
+    .featured--watchbutton,
+    .featured--mylistbutton {
+        font-size: 16px;
+    }
+
+    .featured--genres {
+        font-size: 14px;
+    }
 }
